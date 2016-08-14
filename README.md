@@ -25,7 +25,7 @@ or
 3. git commit -m "Put a significant title here"
 4. git push -u origin master
 
-[![Build Status](https://travis-ci.org/abhijith0505/CarbonContacts.svg?branch=master)](https://travis-ci.org/abhijith0505/CarbonContacts)	![API](https://img.shields.io/badge/API-15-blue.svg)	![contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+[![Build Status](https://travis-ci.org/zisean/CarbonContact-SCC-Group1.svg?branch=master)](https://travis-ci.org/zisean/CarbonContact-SCC-Group1)	![API](https://img.shields.io/badge/API-15-blue.svg)	![contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 
 An android app that lets users select duplicates from their contact list and delete them.
 
