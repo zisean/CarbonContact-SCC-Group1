@@ -6,14 +6,14 @@ Attention!!!
 To avoid Travis CI error, please disable auto formatting LF to CRLF in Git Bash in Windows OS 
 
 git config --global core.autocrlf false
-=======================================
+
 
 To Edit .travis.yml file please use Vim editor 
 
 For Windows OS http://www.vim.org/download.php#pc
 
 For MacOS https://github.com/macvim-dev/macvim
-==================================================
+
 
 Instruction to push a file to master
 
