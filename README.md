@@ -1,11 +1,29 @@
 Carbon Contacts
 ================
 
-#############################################################################################################
-To avoid Travis CI error, please disable auto formatting LF to CRLF by WIndows OS
+Attention!!!
+
+To avoid Travis CI error, please disable auto formatting LF to CRLF in Git Bash in Windows OS 
 
 git config --global core.autocrlf false
+=======================================
 
+To Edit .travis.yml file please use Vim editor 
+
+For Windows OS http://www.vim.org/download.php#pc
+
+For MacOS https://github.com/macvim-dev/macvim
+==================================================
+
+Instruction to push a file to master
+
+1. git add .               (adding all file except things in git ignore)
+
+or
+
+2. git add abc.txt          (adding  one file only) 
+3. git commit -m "Put a significant title here"
+4. git push -u origin master
 
 [![Build Status](https://travis-ci.org/abhijith0505/CarbonContacts.svg?branch=master)](https://travis-ci.org/abhijith0505/CarbonContacts)	![API](https://img.shields.io/badge/API-15-blue.svg)	![contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 
