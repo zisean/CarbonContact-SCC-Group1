@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Carbon Contacts</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_about">About</string>
+    <string name="butText">Delete</string>
+    <string name="dupText">Duplicates Found!</string>
+    <string name="okText">OK</string>
+    <string name="permissionString">We need permission to access your phone contacts to delete them.\n It\'s a contact deleting app after all!</string>
+
+    <string name="banner_ad_unit_test_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="admob_test_appID">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_myAppID">ca-app-pub-4188872795654365~3344636932</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4188872795654365/4821370134</string>
+    <string name="title_activity_recent_deletes">RecentDeletes</string>
+    <string name="action_recently_deleted">Recently deleted</string>
+    <string name="menu_clear_history">Clear History</string>
+    <string name="app_version">1.5</string>
+
+</resources>
