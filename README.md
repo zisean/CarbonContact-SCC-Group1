@@ -23,7 +23,7 @@ or
 
 2. git add abc.txt          (adding  one file only) 
 3. git commit -m "Put a significant title here"
-4. git push -u origin master
+4. git push -u origin master (push to master)
 
 [![Build Status](https://travis-ci.org/zisean/CarbonContact-SCC-Group1.svg?branch=master)](https://travis-ci.org/zisean/CarbonContact-SCC-Group1)	![API](https://img.shields.io/badge/API-15-blue.svg)	![contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 
