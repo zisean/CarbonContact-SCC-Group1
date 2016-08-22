@@ -61,7 +61,3 @@ after_script:
   # print lint results details
   - for f in app/build/outputs/lint-results.html; do pandoc $f -t plain; done
   - for f in data/build/outputs/lint-results.html; do pandoc $f -t plain; done
-
-  addons:
-    code_climate:
-        repo_token: fbceac2ff1de48cfa8ce382d1b078db5cf5ef74d6f6ec1c6b9a540fbe2b77384
