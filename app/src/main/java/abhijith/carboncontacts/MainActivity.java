@@ -1,6 +1,8 @@
 package abhijith.carboncontacts;
 
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
@@ -17,6 +19,7 @@ import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.util.TypedValue;
@@ -73,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     AlertDialog alertDialog;
     TextView valueTV ;
+    private static final int NOTIFICATION_ID=12345; //notification id for each notification
 
 
     @Override
@@ -366,6 +370,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void deleteDupes() {
+        NotificationCompat.Builder notification;
+        notification=new NotificationCompat.Builder(this);
+        notification.setAutoCancel(true);
+        notification.setSmallIcon(R.drawable.logo);
+        notification.setTicker("");
+        notification.setWhen(System.currentTimeMillis());
+        notification.setContentTitle("CarbonContact");
+        notification.setContentText("All Duplicates Has Been Deleted");
+        Intent intent=new Intent(this,MainActivity.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        notification.setContentIntent(pendingIntent);
+
+        NotificationManager nm=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
 
         mProgressDialog.setMessage("Deleting...");
         mProgressDialog.setIndeterminate(false);
@@ -384,6 +402,8 @@ public class MainActivity extends AppCompatActivity {
         }
         if(flag==1)
             mProgressDialog.dismiss();
+            nm.notify(NOTIFICATION_ID,notification.build());
+
     }
 
 
