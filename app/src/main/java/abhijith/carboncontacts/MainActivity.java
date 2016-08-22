@@ -378,6 +378,7 @@ public class MainActivity extends AppCompatActivity {
         notification.setWhen(System.currentTimeMillis());
         notification.setContentTitle("CarbonContact");
         notification.setContentText("All Duplicates Has Been Deleted");
+
         Intent intent=new Intent(this,MainActivity.class);
         PendingIntent pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
         notification.setContentIntent(pendingIntent);
@@ -400,10 +401,13 @@ public class MainActivity extends AppCompatActivity {
             lp.execute("");
             mProgressDialog.show();
         }
-        if(flag==1)
+        if(flag==1) {
             mProgressDialog.dismiss();
-            nm.notify(NOTIFICATION_ID,notification.build());
-
+            Toast.makeText(this, "Duplicated Contacts Deleted Successfully!", Toast.LENGTH_SHORT).show();
+            nm.notify(NOTIFICATION_ID, notification.build());
+        }
+        else
+            Toast.makeText(this, "Duplicated Contacts Delete Failed!", Toast.LENGTH_SHORT).show();
     }
 
 
