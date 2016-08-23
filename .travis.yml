@@ -46,7 +46,6 @@ before_script:
   - emulator -avd test -no-skin -no-audio -no-window &
 
 script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
   - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
@@ -55,6 +54,7 @@ script:
 after_success:
   - ./gradlew jacocoFullReport
   - codecov
+  - bash <(curl -s https://codecov.io/bash)
 
 after_failure:
   - pandoc builder/build/reports/tests/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'
@@ -63,9 +63,7 @@ after_script:
   # print lint results details
   - for f in app/build/outputs/lint-results.html; do pandoc $f -t plain; done
   - for f in data/build/outputs/lint-results.html; do pandoc $f -t plain; done
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+  
 test:
     post:
         - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
