@@ -26,3 +26,11 @@ jacocoTestReport {
         html.enabled false
     }
 }
+
+buildTypes {
+    debug {
+      testCoverageEnabled true
+    }
+  }
+    
+}
