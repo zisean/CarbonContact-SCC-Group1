@@ -49,6 +49,8 @@ script:
   - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
+  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - ./gradlew connectedCheck
 
 after_success:
   - ./gradlew jacocoFullReport
@@ -62,7 +64,7 @@ after_script:
   # print lint results details
   - for f in app/build/outputs/lint-results.html; do pandoc $f -t plain; done
   - for f in data/build/outputs/lint-results.html; do pandoc $f -t plain; done
-  
+
 test:
     post:
         - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
