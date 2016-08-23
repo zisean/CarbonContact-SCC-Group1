@@ -49,8 +49,6 @@ script:
   - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - ./gradlew connectedCheck
 
 after_success:
   - ./gradlew jacocoFullReport
