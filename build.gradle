@@ -1,5 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+apply plugin: 'jacoco'
+
 buildscript {
     repositories {
         jcenter()
@@ -15,5 +17,12 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
     }
 }
