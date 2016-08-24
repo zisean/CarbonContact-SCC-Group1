@@ -26,6 +26,7 @@ or
 4. git push -u origin master (push to master)
 
 [![Build Status](https://travis-ci.org/zisean/CarbonContact-SCC-Group1.svg?branch=master)](https://travis-ci.org/zisean/CarbonContact-SCC-Group1)	![API](https://img.shields.io/badge/API-15-blue.svg)	![contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+[![Coverage Status](https://coveralls.io/repos/github/zisean/CarbonContact-SCC-Group1/badge.svg?branch=master)](https://coveralls.io/github/zisean/CarbonContact-SCC-Group1?branch=master)
 
 An android app that lets users select duplicates from their contact list and delete them.
 
