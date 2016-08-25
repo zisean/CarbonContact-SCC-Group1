@@ -28,7 +28,7 @@ public class PermissionsActivity extends AppCompatActivity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-       getSupportActionBar().hide();
+        getSupportActionBar().hide();
 
         setContentView(R.layout.activity_permission);
         if (ContextCompat.checkSelfPermission(PermissionsActivity.this,

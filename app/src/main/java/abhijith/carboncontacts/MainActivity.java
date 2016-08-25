@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Cleaned
-    //View initialiser
+    //View initializer
     private void initializeViews() {
         listView = (ListView) findViewById(R.id.list);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -368,7 +368,6 @@ public class MainActivity extends AppCompatActivity {
     //________________________________________________________________________________________________________________________________
 
 
-
     public void deleteDupes() {
         NotificationCompat.Builder notification;
         notification=new NotificationCompat.Builder(this);
@@ -403,11 +402,8 @@ public class MainActivity extends AppCompatActivity {
         }
         if(flag==1) {
             mProgressDialog.dismiss();
-            Toast.makeText(this, "Duplicated Contacts Deleted Successfully!", Toast.LENGTH_SHORT).show();
             nm.notify(NOTIFICATION_ID, notification.build());
         }
-        else
-            Toast.makeText(this, "Duplicated Contacts Delete Failed!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -427,7 +423,6 @@ public class MainActivity extends AppCompatActivity {
         }
         cursor.close();
     }
-
 
     public void updateContact(PhoneContact contact, String contactId, String phoneNumberID) {
         ContentResolver contentResolver = this.getContentResolver();
@@ -474,17 +469,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class Load extends AsyncTask<String, String, String> {
-        ProgressDialog progDailog;
+        ProgressDialog progDialog;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progDailog = new ProgressDialog(MainActivity.this);
-            progDailog.setMessage("Finding duplicates...");
-            progDailog.setIndeterminate(false);
-            progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progDailog.setCancelable(false);
-            progDailog.show();
+            progDialog = new ProgressDialog(MainActivity.this);
+            progDialog.setMessage("Finding duplicates...");
+            progDialog.setIndeterminate(false);
+            progDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progDialog.setCancelable(false);
+            progDialog.show();
         }
+
         @Override
         protected String doInBackground(String... aurl) {
             //loads WhatsApp contact number IDs
@@ -506,13 +502,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(String unused) {
             super.onPostExecute(unused);
-            progDailog.dismiss();
-
-
-
+            progDialog.dismiss();
 
             if(contactDuplicates.size() == 0){
                 fab.hide();
@@ -559,7 +553,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private class LongOperation extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -590,9 +583,6 @@ public class MainActivity extends AppCompatActivity {
 
             return null;
         }
-
-
-
 
         @Override
         protected void onPostExecute(String result) {
@@ -653,9 +643,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     private long mBackPressed;
+
     @Override
     public void onBackPressed() {
 
@@ -690,6 +679,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_recent:
                 Intent intent = new Intent(MainActivity.this, RecentDeletes.class);
                 startActivity(intent);
+                return true;
+            case R.id.action_refresh:
+                refreshLists();
+                Load load = new Load();
+                load.execute();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
