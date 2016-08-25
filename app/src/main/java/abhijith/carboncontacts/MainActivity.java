@@ -312,6 +312,7 @@ public class MainActivity extends AppCompatActivity {
         for (PhoneContact contact : contactDuplicates) {
             onlyDuplicates.add(contact.getContactName() + "(" + contact.getContactType() + "): " + contact.getContactNumber());
         }
+        adapter.notifyDataSetChanged();
     }
 
     //Cleaned
@@ -405,7 +406,6 @@ public class MainActivity extends AppCompatActivity {
             nm.notify(NOTIFICATION_ID, notification.build());
         }
     }
-
 
     public void emptyRemover(String s) {
         ContentResolver contentResolver = this.getContentResolver();
@@ -682,8 +682,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_refresh:
                 refreshLists();
-                Load load = new Load();
-                load.execute();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
