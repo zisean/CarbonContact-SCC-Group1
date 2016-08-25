@@ -17,7 +17,11 @@ public class PhoneContact implements Comparable<PhoneContact> {
     //TODO: Add more fields like display pic, email etc for better user experience
 
     PhoneContact(String number, String name, String type, String id, String phoneNumberID){
-        contactNumber = number.trim().replaceAll(" ","");
+        String tempNumber;
+        tempNumber = number.trim().replaceAll(" ","");
+        tempNumber = tempNumber.trim().replaceAll("-","");
+        tempNumber = tempNumber.trim().replace("(", "");
+        contactNumber = tempNumber.trim().replace(")", "");
         contactName = name;
         contactType = type;
         contactID = id;
