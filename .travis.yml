@@ -41,8 +41,8 @@ addons:
 before_install:
   - pip install --user codecov
   - curl https://www.jpm4j.org/install/script | sh
-  - sudo sh jpmInstall.sh
-  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
+  - sh jpmInstall.sh
+  - jpm install com.codacy:codacy-coverage-reporter:assembly
 
 before_script:
   - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
