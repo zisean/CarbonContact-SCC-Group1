@@ -41,17 +41,17 @@ addons:
 before_install:
   - pip install --user codecov
   - curl https://www.jpm4j.org/install/script | sh
-  - sh jpmInstall.sh
-  - jpm install com.codacy:codacy-coverage-reporter:assembly
 
 before_script:
   - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
 
 script:
+  - ./gradlew build jacocoTestReport assembleAndroidTest
   - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
+  - ./gradlew connectedCheck
 
 after_success:
   - ./gradlew jacocoFullReport
