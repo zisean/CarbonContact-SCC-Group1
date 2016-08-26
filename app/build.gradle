@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco'
+apply plugin: "jacoco"
+
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
@@ -10,15 +11,24 @@ android {
         targetSdkVersion 24
         versionCode 6
         versionName "1.5"
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            versionNameSuffix " Debug"
+            debuggable true
+            testCoverageEnabled = true
+        }
+    }
+    buildTypes {
+        debug {
             testCoverageEnabled true
         }
     }
-
 }
 
 dependencies {
@@ -28,4 +38,39 @@ dependencies {
     compile 'com.android.support:design:24.0.0'
     compile 'com.google.firebase:firebase-ads:9.2.0'
     compile 'com.google.code.gson:gson:2.7'
+}
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+    reportsDir = file("$buildDir/reports/jacoco")
+
+}
+
+task jacocoReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
+    group = 'Reporting'
+    description = 'Generate Jacoco coverage reports after running tests.'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    classDirectories = fileTree(
+            dir: 'build/intermediates/classes/debug',
+            excludes: [
+                    '**/R*.class',
+                    '**/BuildConfig*'
+            ]
+    )
+
+    sourceDirectories = files('src/main/java')
+    executionData = files('build/jacoco/testDebugUnitTest.exec')
+
+    doFirst {
+        files('build/intermediates/classes/debug').getFiles().each { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
+    }
 }
