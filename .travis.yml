@@ -40,6 +40,9 @@ addons:
 
 before_install:
   - pip install --user codecov
+  - curl https://www.jpm4j.org/install/script | sh
+  - sudo sh jpmInstall.sh
+  - sudo jpm install com.codacy:codacy-coverage-reporter:assembly
 
 before_script:
   - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
@@ -67,3 +70,5 @@ test:
     post:
         - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
         - bash <(curl -s https://codecov.io/bash) -t uuid-repo-token
+        - ./gradlew jacocoReport
+        - codacy-coverage-reporter -l Java -r
