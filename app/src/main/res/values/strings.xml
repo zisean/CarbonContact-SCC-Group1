@@ -17,5 +17,6 @@
     <string name="action_recently_deleted">Recently deleted</string>
     <string name="menu_clear_history">Clear History</string>
     <string name="app_version">1.5</string>
+    <string name="action_refresh">Refresh</string>
 
 </resources>
