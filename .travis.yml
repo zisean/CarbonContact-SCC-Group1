@@ -47,11 +47,11 @@ before_script:
   - emulator -avd test -no-skin -no-audio -no-window &
 
 script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
+  - gradlew build jacocoTestReport assembleAndroidTest
   - android-wait-for-emulator
   - adb devices
   - adb shell input keyevent 82 &
-  - ./gradlew connectedCheck
+  - gradlew connectedCheck
 
 after_success:
   - ./gradlew jacocoFullReport
