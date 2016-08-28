@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 language: android
 sudo: false
 jdk: oraclejdk8
@@ -41,7 +40,7 @@ addons:
 
 before_install:
   - pip install --user codecov
-
+  
 install:
   - pip install coveralls
   
@@ -72,85 +71,3 @@ test:
     post:
         - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
         - bash <(curl -s https://codecov.io/bash) -t uuid-repo-token
-=======
-language: android
-sudo: false
-jdk: oraclejdk8
-env:
-  matrix:
-    - ANDROID_TARGET=android-24 ANDROID_ABI=armeabi-v7a
-  global:
-    # wait up to 10 minutes for adb to connect to emulator
-    - ADB_INSTALL_TIMEOUT=2
-     # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-    #   via the "travis encrypt" command using the project repo's public key
-    - secure: "djwWWMj8mWlnNpklKk6+YIitejq7bnWM2PpIix5TNzPjFkJz4O5QR9z3WGbd8afnmC2z+16/at02Thr2uOWl5KFOhScVXLTigOHHpdgOD9s+P9+vU9eneZepgQ8V92Nzrn00ylsgq7mhlOtG2CBTE2+1UPDAyJb4pI4cwR0lmUX/KMETsncFoD1eWt0LKzlIiMikdtx8ZFnJBVe7S9v/0M2uOunQ3xfI+NJkE0ksc4qaDgnkpUDYrwkovXeTYPPPwVRtAOPxtVxJGRQkBfPEOhac8LNgxXWXI0i8YCJWI13KoXHPfy5TLV83GXOXvr0cyeCM6ifnxRVBeWL5RhyXYKlFsxPPFB79cnhabKCIuruTGHeKRWEoiNesMaVROrhz7/DFxCg6mWUBqo703A5GAEQcAVYS+Dpay/+eJe+rKKC6Ve9Ed0LOPxZ1paAjcHvXZSciOGLYZFj5iMzVQYWB6cBIKtE/vGq2c/aA6kJeJkGc90e30usqiDfn0gITNkDOV6Y7B3Fe6Nr+y0g0CmlNg3r259CQEgEJKzdbtF1LxWZzip1cdl+5YeCzMmsmK60rOCgJggxhS/HYBhyyXLpge0VITqQ78tcFhxJZTl6nLWbJWjsPFzuYLX/jzC/Y0/Tp8v/aR3WJxkuPpeqDOi4rqwPUTXWaKOXczbN0LwdABFQ="
-
-android:
-  components:
-  - platform-tools
-  - tools
-  - build-tools-24.0.0
-  - android-24
-
-  # Additional components
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - extra-android-support
-
-  # Emulator for the tests
-  - sys-img-armeabi-v7a-android-24
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/2.8
-    - $HOME/.gradle/caches/jars-1
-    - $HOME/.gradle/daemon
-    - $HOME/.gradle/native
-    - $HOME/.gradle/wrapper
-
-addons:
-  apt_packages:
-    - pandoc
-  artifacts:
-    paths:
-      - $(git ls-files -o | grep build/outputs | tr "\n" ":")
-  coverity_scan:
-    project:
-      name: "zisean/CarbonContact-SCC-Group1"
-      description: "Carbon_Contact"
-    notification_email: zxchow@gmail.com
-    build_command_prepend: "./gradlew clean"
-    build_command:   "./gradlew build --stacktrace"
-    branch_pattern: master
-
-before_install:
-  - pip install --user codecov
-
-before_script:
-  - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-
-script:
-  - android-wait-for-emulator
-  - adb devices
-  - adb shell input keyevent 82 &
-
-after_success:
-  - ./gradlew jacocoFullReport
-  - codecov
-  - bash <(curl -s https://codecov.io/bash)
-
-after_failure:
-  - pandoc builder/build/reports/tests/index.html -t plain | sed -n '/^Failed tests/,/default-package/p'
-
-after_script:
-  # print lint results details
-  - for f in app/build/outputs/lint-results.html; do pandoc $f -t plain; done
-  - for f in data/build/outputs/lint-results.html; do pandoc $f -t plain; done
-  
-test:
-    post:
-        - if [ -e ./gradlew ]; then ./gradlew jacocoTestReport;else gradle jacocoTestReport;fi
-        - bash <(curl -s https://codecov.io/bash) -t uuid-repo-token
->>>>>>> e2f9417967e77fd09db000acc3746b3fcbe25679
