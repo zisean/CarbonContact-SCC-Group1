@@ -53,6 +53,7 @@ script:
 after_success:
   - ./gradlew jacocoFullReport
   - codecov
+  - coveralls
   - bash <(curl -s https://codecov.io/bash)
 
 after_failure:
