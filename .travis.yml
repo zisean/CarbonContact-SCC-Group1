@@ -7,6 +7,9 @@ env:
   global:
     # wait up to 10 minutes for adb to connect to emulator
     - ADB_INSTALL_TIMEOUT=2
+     # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    #   via the "travis encrypt" command using the project repo's public key
+    - secure: "djwWWMj8mWlnNpklKk6+YIitejq7bnWM2PpIix5TNzPjFkJz4O5QR9z3WGbd8afnmC2z+16/at02Thr2uOWl5KFOhScVXLTigOHHpdgOD9s+P9+vU9eneZepgQ8V92Nzrn00ylsgq7mhlOtG2CBTE2+1UPDAyJb4pI4cwR0lmUX/KMETsncFoD1eWt0LKzlIiMikdtx8ZFnJBVe7S9v/0M2uOunQ3xfI+NJkE0ksc4qaDgnkpUDYrwkovXeTYPPPwVRtAOPxtVxJGRQkBfPEOhac8LNgxXWXI0i8YCJWI13KoXHPfy5TLV83GXOXvr0cyeCM6ifnxRVBeWL5RhyXYKlFsxPPFB79cnhabKCIuruTGHeKRWEoiNesMaVROrhz7/DFxCg6mWUBqo703A5GAEQcAVYS+Dpay/+eJe+rKKC6Ve9Ed0LOPxZ1paAjcHvXZSciOGLYZFj5iMzVQYWB6cBIKtE/vGq2c/aA6kJeJkGc90e30usqiDfn0gITNkDOV6Y7B3Fe6Nr+y0g0CmlNg3r259CQEgEJKzdbtF1LxWZzip1cdl+5YeCzMmsmK60rOCgJggxhS/HYBhyyXLpge0VITqQ78tcFhxJZTl6nLWbJWjsPFzuYLX/jzC/Y0/Tp8v/aR3WJxkuPpeqDOi4rqwPUTXWaKOXczbN0LwdABFQ="
 
 android:
   components:
@@ -37,11 +40,18 @@ addons:
   artifacts:
     paths:
       - $(git ls-files -o | grep build/outputs | tr "\n" ":")
-  code_climate:
-    repo_token: fbceac2ff1de48cfa8ce382d1b078db5cf5ef74d6f6ec1c6b9a540fbe2b77384
+  coverity_scan:
+    project:
+      name: "zisean/CarbonContact-SCC-Group1"
+      description: "Carbon_Contact"
+    notification_email: zxchow@gmail.com
+    build_command_prepend: "./gradlew clean"
+    build_command:   "./gradlew build --stacktrace"
+    branch_pattern: master
 
 before_install:
   - pip install --user codecov
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 before_script:
   - echo no | android create avd --force --name test --target $ANDROID_TARGET --abi $ANDROID_ABI
