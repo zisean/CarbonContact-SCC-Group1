@@ -37,6 +37,8 @@ addons:
   artifacts:
     paths:
       - $(git ls-files -o | grep build/outputs | tr "\n" ":")
+  code_climate:
+    repo_token: fbceac2ff1de48cfa8ce382d1b078db5cf5ef74d6f6ec1c6b9a540fbe2b77384
 
 before_install:
   - pip install --user codecov
